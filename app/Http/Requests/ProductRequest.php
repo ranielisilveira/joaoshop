@@ -24,10 +24,7 @@ class ProductRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-        $id = null;
-        if (!is_null($request->id)) {
-            $id = $request->id;
-        }
+        $id = $request->id ?? null;
 
         return [
             'sku_code' => 'required|max:255|unique:products,sku_code,' . $id . 'id',
