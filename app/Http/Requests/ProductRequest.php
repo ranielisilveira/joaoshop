@@ -29,6 +29,8 @@ class ProductRequest extends FormRequest
         return [
             'sku_code' => 'required|max:255|unique:products,sku_code,' . $id . 'id',
             'category_id' => 'required|exists:categories,id',
+            'files' => 'nullable|array|max:3',
+            'files.*' => 'file|mimes:png,jpg',
             'name' => 'required|max:255',
             'price' => 'required|numeric',
             'composition' => 'required',
@@ -52,7 +54,11 @@ class ProductRequest extends FormRequest
             'composition.required' => 'A composição do produto deve ser fornecida.',
             'size.required' => 'O tamanho do produto deve ser fornecido.',
             'stock.required' => 'A quantidade em estoque deve ser fornecida para o produto.',
-            'stock.numeric' => 'A quantidade em estoque deve ser fornecida corretamente para o produto',
+            'stock.numeric' => 'A quantidade em estoque deve ser fornecida corretamente para o produto.',
+            'files.array' => 'O arquivos devem ser fornecedidos corretamente.',
+            'files.max' => 'O máximo de arquivos enviados não pode ser superior a 3.',
+            'files.*.file' => 'Os arquivos enviados devem ser válidos.',
+            'files.*.mimes' => 'O tipo do arquivo deve ser png ou jpg.',
         ];
     }
 }
