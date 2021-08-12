@@ -2,12 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Product extends Model
 {
-    use HasFactory;
+    use LogsActivity;
+
+    protected static $logAttributes = [
+        'sku_code',
+        'category_id',
+        'name',
+        'price',
+        'composition',
+        'size',
+        'stock',
+    ];
+    protected static $logOnlyDirty = true;
 
     protected $fillable = [
         'sku_code',
